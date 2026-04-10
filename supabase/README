@@ -1,0 +1,31 @@
+# Supabase setup
+
+## 1) Create project
+
+- Create a Supabase project.
+- In **Storage**, create a bucket named `ciphervault` (private).
+
+## 2) Run SQL migration
+
+Open **SQL Editor** and run:
+
+- `supabase/migrations/001_init.sql`
+
+This creates:
+- `profiles`
+- `user_public_keys`
+- `transfers`
+with Row Level Security policies.
+
+## 3) Storage access model
+
+This app uses **signed upload/download URLs** minted server-side with the **Service Role** key, so the client never needs direct write permissions on the bucket.
+
+## 4) Environment variables
+
+Copy `.env.example` to `.env.local` and fill:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY` (server-only)
+
